@@ -32,7 +32,13 @@ public class DToast {
         if (mContext == null) return null;
         //如果有通知权限，直接使用系统Toast
         //MIUI系统没有通知权限时系统Toast也能正常展示
-        if (NotificationManagerCompat.from(mContext).areNotificationsEnabled() || Util.isMIUI()) {
+//        if (NotificationManagerCompat.from(mContext).areNotificationsEnabled() || Util.isMIUI()) {
+//            return new SystemToast(mContext);
+//        } else {//否则使用自定义Toast
+//            return new DovaToast(mContext);
+//        }
+        //由于手动关闭低版本的MIUI通知权限也会导致Toast无法弹出，这里就单纯的判断是否开启了通知权限
+        if (NotificationManagerCompat.from(mContext).areNotificationsEnabled()) {
             return new SystemToast(mContext);
         } else {//否则使用自定义Toast
             return new DovaToast(mContext);
